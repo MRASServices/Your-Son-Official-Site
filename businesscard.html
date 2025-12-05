@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Son's Business Card</title>
+
+  <!-- Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito+Sans+Expanded:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Nunito Sans Expanded", system-ui, -apple-system, sans-serif;
+      background-color: #000000;
+      background-image: url("https://github.com/MRASServices/MRASS2/blob/main/Main%20Brick%20Background%20Fixed%201.0.png?raw=true");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      color: #000000;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    /* ---------- SPLASH SCREEN ---------- */
+
+    #splash {
+      position: fixed;
+      inset: 0;
+      background: #fdf7e9; /* same cream as page */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    #splash-logo {
+      max-width: 101vw;
+      max-height: 101vh;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+      border-radius: 6px;
+      opacity: 0;
+      transform: scale(0.9);
+      animation: splash-zoom-in 3.5s ease-out 1s forwards;
+    }
+
+    @keyframes splash-zoom-in {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    #splash.fade-out {
+      opacity: 0;
+      transition: opacity 2s ease;
+    }
+
+    /* ---------- CARD LAYOUT ---------- */
+
+    .card {
+      width: 100%;
+      max-width: 660px;
+      background: #fff7e6;
+      border: 4px solid black;
+      border-radius: 18px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
+      padding: 2rem 1.8rem 1.8rem;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .card.show {
+      opacity: 1;
+    }
+
+    .logo-wrap {
+      display: flex;
+      justify-content: center;
+      align-items:center;
+      margin-bottom: 0.8rem;
+    }
+
+    .logo-link {
+      display: inline-flex;     
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .logo-img {
+      max-width: 35%;
+      border-radius: 50%;
+      display: block;
+      filter: drop-shadow(0px 0px 11px rgba(0,0,0,0.87));
+    }
+
+    .tagline {
+      text-align: center;
+      font-size: 0.7rem;
+      font-weight: 450;
+      text-transform: uppercase;
+      letter-spacing: 0.16rem;
+      color: #000000;
+      margin-top: 1.1rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .name {
+      text-align: center;
+      font-size: 3.5rem;
+      font-weight: 400;
+      color: #000000;
+      letter-spacing: 0.14em;
+      word-spacing: 0.5rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .actions-row {
+      display: flex;
+      justify-content: center;
+      gap: 2.3rem;
+      margin-bottom: 1.25rem;
+      margin-top:1.25rem;
+    }
+
+    .icon-btn {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 1.2rem;
+      color: #333;
+      transition: transform 0.12s ease;
+    }
+
+    .icon-img-inner {
+      width: 40px;
+      height: 40px;
+      display: block;
+    }
+
+    .icon-btn:hover,
+    .icon-btn:focus-visible {
+      transform: scale(1.1); /* grow a bit */
+    }
+
+    .icon-btn:active {
+      transform: scale(0.96);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin-top:1.25rem;
+      margin-bottom:1.25rem;
+    }
+
+    .add-contact-btn {
+      width: 100%;
+      border: none;
+      border-radius: 999px;
+      padding: 0.8rem 1rem;
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 0.3rem;
+      text-transform: uppercase;
+      background: #000000;
+      color: #fff7e6;
+      cursor: pointer;
+      margin-bottom: 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .add-contact-btn:hover,
+    .add-contact-btn:focus-visible {
+      transform: scale(1.03);
+      box-shadow: 0px 0px 9px 5px rgba(0,0,0,0.5);
+    }
+
+    .add-contact-btn span {
+      margin-left: 0.45rem;
+      font-size: 1.1rem;
+    }
+
+    .blurb {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #000000;
+      margin-bottom: 2rem;
+      margin-top: 1rem;
+      letter-spacing:0.1rem;
+      text-align: justify;
+      font-weight: 400;
+    }
+
+    .section-title {
+      font-size: 1.05rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15rem;
+      color: #000000;
+      margin-bottom: 0rem;
+      border-bottom: 1px solid #000000;
+      line-height: 1.75rem;
+    }
+
+    .contact-list {
+      list-style: none;
+      margin-bottom: 0.25rem;
+      font-size:1rem;
+      margin-top: 1rem;
+      line-height:1.25rem;
+      font-weight: 500;
+      letter-spacing:0.1rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.4rem 0;
+      font-size: 0.92rem;
+    }
+
+    .contact-label {
+      color: #000000;
+    }
+
+    .contact-value a,
+    .contact-value {
+      color: #000000;
+      text-decoration: none;
+    }
+
+    .contact-value a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+
+      .card {
+        max-width: 100%;
+        padding: 1.5rem 1.2rem 1.5rem;
+      }
+
+      .logo-img {
+        max-width: 45%;
+      }
+
+      .name {
+        font-size: 2.6rem;
+        letter-spacing: 0.12em;
+        word-spacing: 0.35rem;
+      }
+
+      .tagline {
+        font-size: 0.65rem;
+        letter-spacing: 0.14rem;
+        margin-top: 0.8rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .actions-row {
+        gap: 1.6rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .icon-btn {
+        width: 56px;
+        height: 56px;
+      }
+
+      .blurb {
+        font-size: 0.95rem;
+        letter-spacing: 0.06rem;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .card {
+        padding: 1.25rem 1rem 1.25rem;
+      }
+
+      .name {
+        font-size: 2.1rem;
+        letter-spacing: 0.1em;
+        word-spacing: 0.25rem;
+      }
+
+      .tagline {
+        font-size: 0.6rem;
+        letter-spacing: 0.12rem;
+      }
+
+      .blurb {
+        font-size: 0.9rem;
+      }
+
+      .actions-row {
+        gap: 1.2rem;
+      }
+
+      .icon-btn {
+        width: 52px;
+        height: 52px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <!-- SPLASH SCREEN -->
+  <div id="splash" aria-hidden="true">
+    <img
+      id="splash-logo"
+      src="https://github.com/MRASServices/MRASS2/blob/main/New%20Splash%20Page.png?raw=true"
+      alt="Your Son Professional Services logo"
+    />
+  </div>
+
+  <!-- MAIN CARD -->
+  <main class="card" aria-label="Your Son Digital Business Card">
+    <div class="logo-wrap">
+      <a
+        href="https://www.yourson.ca"
+        class="logo-link"
+        aria-label="Home Page"
+      >
+        <img
+          class="logo-img"
+          src="https://github.com/MRASServices/MRASS2/blob/main/Home%20Page%20Logo.png?raw=true"
+          alt="Your Son Professional Services logo"
+        />
+      </a>
+    </div>
+
+    <div class="name">YOUR SON</div>
+    <div class="tagline">YOU HAVE ONE FOR A REASON</div>
+
+    <div class="actions-row">
+      <a class="icon-btn" href="tel:+12892318387" aria-label="Call Your Son">
+        <img
+          src="https://raw.githubusercontent.com/MRASServices/MRASS2/fc0d39b12cbbdabdbed922783ff60a6d20a2bee4/CM2243659B.svg"
+          alt="Call"
+          class="icon-img-inner"
+        />
+      </a>
+      <a class="icon-btn" href="mailto:connectwith@yourson.ca" aria-label="Email Your Son">
+        <img
+          src="https://raw.githubusercontent.com/MRASServices/MRASS2/fc0d39b12cbbdabdbed922783ff60a6d20a2bee4/CM2243659B-3.svg"
+          alt="Email"
+          class="icon-img-inner"
+        />
+      </a>
+      <a
+        class="icon-btn"
+        href="https://www.google.com/maps/search/?api=1&query=Newmarket,+ON,+Canada"
+        target="_blank"
+        rel="noopener"
+        aria-label="View location"
+      >
+        <img
+          src="https://raw.githubusercontent.com/MRASServices/MRASS2/fc0d39b12cbbdabdbed922783ff60a6d20a2bee4/CM2243659B-2.svg"
+          alt="Location"
+          class="icon-img-inner"
+        />
+      </a>
+    </div>
+
+    <a
+      class="add-contact-btn"
+      href="https://vcf.fyi/eb3b47d9"
+      download
+    >
+      Add to Contacts +
+    </a>
+
+    <p class="blurb">
+      <span style="font-size: 3rem; line-height: 1rem; letter-spacing:-0.4rem">Y</span>our Son was created with the express purpose of making life easier for the individuals, families, and professionals that we work with. <br><br>
+      We can be described as full-time fixers; a jack of every trade; or an oddly pleasant mix of handyman and personal assistant - with a lot of other capabilities in between.<br><br>
+      What matters most is that we get things done - properly, earnestly, and transparently. To encompass all that we do and the way we do it, we simply say that we are:
+    </p>
+
+    <p style="text-align: center; margin-top:-0.5rem; margin-bottom:2rem; font-size: 1rem; line-height: 1.1; letter-spacing:0.1rem; font-weight: 400">
+      "Like having a son that actually listens."
+    </p>
+
+    <div class="section-title">Contact</div>
+    <ul class="contact-list">
+      <li class="contact-item">
+        <span class="contact-label">Phone</span>
+        <span class="contact-value"><a href="tel:+12892318387">289-231-8387</a></span>
+      </li>
+      <li class="contact-item">
+        <span class="contact-label">Email</span>
+        <span class="contact-value"><a href="mailto:connectwith@yourson.ca">connectwith@yourson.ca</a></span>
+      </li>
+      <li class="contact-item">
+        <span class="contact-label">Website</span>
+        <span class="contact-value"><a href="https://www.yourson.ca" target="_blank" rel="noopener">www.yourson.ca</a></span>
+      </li>
+      <li class="contact-item">
+        <span class="contact-label">Location</span>
+        <span class="contact-value">Newmarket, Ontario</span>
+      </li>
+    </ul>
+
+  </main>
+
+  <script>
+    // When the page finishes loading:
+    window.addEventListener("load", function () {
+      const splash = document.getElementById("splash");
+      const card = document.querySelector(".card");
+
+      // Small pause so the logo can be seen, then fade splash out
+      setTimeout(function () {
+        splash.classList.add("fade-out");
+
+        splash.addEventListener("transitionend", function () {
+          splash.style.display = "none";
+        });
+
+        // Fade card in
+        card.classList.add("show");
+      }, 5000); // adjust timing if you want the splash to stay longer
+    });
+  </script>
+</body>
+</html>
