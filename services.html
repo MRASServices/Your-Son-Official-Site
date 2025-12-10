@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>YOUR SON: SERVICES</title>
+
+  <!-- Nunito Sans Expanded -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans+Expanded:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Reset & body background */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { min-height: 100%; overflow-x: hidden; }
+
+    :root { --nav-h: 80px; }
+
+    body {
+      font-family: 'Nunito Sans Expanded', sans-serif;
+      background: rgb(0,0,0) url('https://github.com/MRASServices/MRASS2/blob/main/Main%20Brick%20Background%20Fixed%201.0.png?raw=true') no-repeat center/cover;
+      color: #2d2b29;
+    }
+
+    /* =========================
+       NAV (MATCHES ABOUT PAGE)
+       ========================= */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(255,255,255,0.2) 100%);
+      backdrop-filter: blur(10px);
+      border: 1px solid #000;
+      z-index: 100;
+      overflow: visible;
+    }
+
+    .logo-container { position: relative; z-index: 3; }
+
+    .logo-container img {
+      width: clamp(60px, 5vw, 110px);
+      margin-top: 0.3rem;
+      cursor: pointer;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .nav-item {
+      position: absolute;
+      top: 50%;
+      --tx: -50%;
+      transform: translate(var(--tx), -50%);
+      opacity: 0;
+      color: #FFF9E6;
+      text-decoration: none;
+      font-weight: 325;
+      font-size: clamp(0.9rem, 1vw, 1.1rem);
+      transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease-in-out;
+      z-index: 4;
+      pointer-events: auto;
+      white-space: nowrap;
+    }
+
+    .nav-item:hover {
+      transform: translate(var(--tx), -50%) scale(1.06);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    /* Desktop-only: cascade positions + hidden unless active */
+    @media (min-width: 769px) {
+      .nav-active .nav-item-1 { --tx: -440%; opacity: 1; transition-delay: 0.1s; }
+      .nav-active .nav-item-2 { --tx: 155%;  opacity: 1; transition-delay: 0.25s; }
+      .nav-active .nav-item-3 { --tx: -145%; opacity: 1; transition-delay: 0.25s; }
+      .nav-active .nav-item-4 { --tx: 375%;  opacity: 1; transition-delay: 0.1s; }
+
+      nav:not(.nav-active) .nav-item {
+        --tx: -50%;
+        transform: translate(var(--tx), -50%);
+        opacity: 0;
+      }
+    }
+
+    /* Mobile dropdown */
+    @media (max-width: 768px) {
+      nav { flex-direction: column; height: auto; }
+
+      .nav-item {
+        position: static;
+        opacity: 1;
+        transform: none;
+        display: none;
+        margin: 0.5rem 0;
+        transition-delay: 0s;
+      }
+
+      nav.nav-open .nav-item {
+        display: block;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+
+    /* =========================
+       OVERLAY WITH TWO SEGMENTS
+       ========================= */
+    #overlay {
+      position: absolute;
+      top: var(--nav-h);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+    }
+
+    .segment {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-right: 1px solid #000;
+
+      /* anchor reset */
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .segment:last-child { border-right: none; }
+
+    .segment::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: rgb(254, 248, 230);
+      opacity: 0.3;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+    }
+
+    .segment:hover::before { opacity: 0; }
+
+    .nav-label {
+      position: relative;
+      top: -2rem;
+      z-index: 2;
+      font-size: 5rem;
+      font-weight: 400;
+      letter-spacing: 0.5ch;
+      color: #000;
+      pointer-events: none;
+      user-select: none;
+      text-align: center;
+      line-height: 1.2;
+      transition: color 0.3s ease;
+    }
+
+    .segment:hover .nav-label { color: rgb(254, 248, 230); }
+
+    /* Remove blue underline in all states */
+    #overlay .segment,
+    #overlay .segment:visited,
+    #overlay .segment:hover,
+    #overlay .segment:active {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Mobile/tablet: stack segments */
+    @media (max-width: 1024px) {
+      #overlay { flex-direction: column; }
+      .segment { border-right: none; border-bottom: 1px solid #000; }
+      .segment:last-child { border-bottom: none; }
+      .nav-label { top: 0; margin: 0; font-size: clamp(2.25rem, 6vw, 3.5rem); letter-spacing: 0.25ch; }
+    }
+
+    /* Mobile fine tuning */
+    @media (max-width: 768px) {
+      .segment { min-height: 40vh; }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Nav bar (now matches ABOUT YOUR SON) -->
+  <nav id="navbar">
+    <div class="logo-container">
+      <img
+        src="https://raw.githubusercontent.com/MRASServices/MRASS2/main/Home%20Page%20Logo.png"
+        alt="Your Son Logo"
+        id="nav-logo"
+        role="button"
+        tabindex="0"
+        aria-controls="navbar"
+        aria-expanded="false"
+      />
+    </div>
+
+    <a class="nav-item nav-item-1" href="https://yourson.ca/about">ABOUT YOUR SON</a>
+    <a class="nav-item nav-item-2" href="https://yourson.ca/services">YOUR SON’S SERVICES</a>
+    <a class="nav-item nav-item-3" href="https://yourson.ca/contact&availability">CONTACT &amp; AVAILABILITY</a>
+    <a class="nav-item nav-item-4" href="https://yourson.ca/garments&goods">GARMENTS &amp; GOODS</a>
+  </nav>
+
+  <!-- Two-segment overlay -->
+  <div id="overlay">
+    <a class="segment" href="https://yourson.ca/businessservices">
+      <span class="nav-label">BUSINESS</span>
+    </a>
+    <a class="segment" href="https://yourson.ca/personalservices">
+      <span class="nav-label">PERSONAL</span>
+    </a>
+  </div>
+
+  <script>
+    (function () {
+      const nav = document.getElementById('navbar');
+      const logo = document.getElementById('nav-logo');
+
+      const setNavHeightVar = () => {
+        const h = nav ? nav.offsetHeight : 80;
+        document.documentElement.style.setProperty('--nav-h', h + 'px');
+      };
+
+      if (nav) {
+        nav.addEventListener('mouseenter', () => {
+          if (window.innerWidth > 768) nav.classList.add('nav-active');
+        });
+
+        nav.addEventListener('mouseleave', () => {
+          if (window.innerWidth > 768) nav.classList.remove('nav-active');
+        });
+
+        document.querySelectorAll('.nav-item').forEach(item => {
+          item.addEventListener('mouseenter', () => {
+            if (window.innerWidth > 768) nav.classList.add('nav-active');
+          });
+        });
+      }
+
+      if (logo && nav) {
+        const toggleMobile = () => {
+          if (window.innerWidth <= 768) {
+            const open = nav.classList.toggle('nav-open');
+            logo.setAttribute('aria-expanded', String(open));
+            setNavHeightVar();
+          } else {
+            // desktop logo click behaves like your ABOUT page
+            window.location.href = 'index.html';
+          }
+        };
+
+        logo.addEventListener('click', toggleMobile);
+        logo.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMobile(); }
+        });
+      }
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && nav) {
+          nav.classList.remove('nav-open');
+          if (logo) logo.setAttribute('aria-expanded', 'false');
+        }
+        setNavHeightVar();
+      });
+
+      window.addEventListener('load', setNavHeightVar);
+      setNavHeightVar();
+    })();
+  </script>
+
+</body>
+</html>

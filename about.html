@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ABOUT YOUR SON</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Nunito Sans Expanded', sans-serif;
+      background-image: url('https://github.com/MRASServices/MRASS2/blob/main/About%20Your%20Son%20Background%20with%20New%20Bricks.png?raw=true');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center -4rem;
+      background-attachment: scroll;
+      background-color: #000;
+      color: #FFF9E6;
+      min-height: 215vh;
+      overflow-x: hidden;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        background-image: url('https://github.com/MRASServices/MRASS2/blob/main/About%20Your%20Son%20Background%20with%20New%20Bricks.png?raw=true');
+        background-size: auto;
+        background-position: center;
+      }
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(255,255,255,0.2) 100%);
+      backdrop-filter: blur(10px);
+      border: 1px solid #000;
+      z-index: 100;
+      overflow: visible;
+    }
+
+    .logo-container { position: relative; z-index: 3; }
+
+    .logo-container img {
+      width: clamp(60px, 5vw, 110px);
+      margin-top: 0.3rem;
+      cursor: pointer;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .nav-item {
+      position: absolute;
+      top: 50%;
+      --tx: -50%;
+      transform: translate(var(--tx), -50%);
+      opacity: 0;
+      color: #FFF9E6;
+      text-decoration: none;
+      font-weight: 325;
+      font-size: clamp(0.9rem, 1vw, 1.1rem);
+      transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease-in-out;
+      z-index: 4;
+      pointer-events: auto;
+    }
+
+    /* Hover styling (fine to keep global) */
+    .nav-item:hover {
+      transform: translate(var(--tx), -50%) scale(1.06);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    /* ✅ DESKTOP-ONLY: cascade animation + “hide unless active” rule */
+    @media (min-width: 769px) {
+      .nav-active .nav-item-1 { --tx: -440%; opacity: 1; transition-delay: 0.1s; }
+      .nav-active .nav-item-2 { --tx: 155%;  opacity: 1; transition-delay: 0.25s; }
+      .nav-active .nav-item-3 { --tx: -145%; opacity: 1; transition-delay: 0.25s; }
+      .nav-active .nav-item-4 { --tx: 375%;  opacity: 1; transition-delay: 0.1s; }
+
+      nav:not(.nav-active) .nav-item {
+        --tx: -50%;
+        transform: translate(var(--tx), -50%);
+        opacity: 0;
+      }
+    }
+
+    /* ✅ MOBILE dropdown */
+    @media (max-width: 768px) {
+      nav { flex-direction: column; height: auto; }
+
+      .nav-item {
+        position: static;
+        opacity: 1;
+        transform: none;
+        display: none;
+        margin: 0.5rem 0;
+        transition-delay: 0s;
+      }
+
+      /* ✅ when opened, show AND keep visible */
+      nav.nav-open .nav-item {
+        display: block;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+
+    .main-textbox {
+      max-width: 860ch;
+      width: 80%;
+      position: relative;
+      top: 100vh;
+      margin: 120px auto 0 auto;
+      padding: clamp(0.5rem, 3vw, 3rem);
+      background: rgba(255, 249, 230, 0.9);
+      color: #333333;
+      font-size: clamp(0.85rem, 1.5vw, 1.5rem);
+      line-height: 1.5;
+      font-weight: 100;
+      letter-spacing: 0.05ch;
+      text-align: justify;
+      border-radius: 20px;
+      border: 10px solid #000;
+      box-shadow: 5px 5px 35px 25px #000000;
+      z-index: 10;
+    }
+
+    .main-textbox h1 {
+      font-size: 4rem;
+      font-weight: 350;
+      letter-spacing: 0.25ch;
+      word-spacing: 0.25ch;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .main-textbox p.quote {
+      text-align: center;
+      font-weight: 400;
+      font-style: italic;
+      margin: 2rem 2rem;
+    }
+
+    .signature {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .main-textbox {
+        max-width: 860ch;
+        width: 99%;
+        position: relative;
+        top: 100vh;
+        margin: 120px auto 0 auto;
+        padding: clamp(0.5rem, 3vw, 3rem);
+        background: rgba(255, 249, 230, 0.9);
+        color: #333333;
+        font-size: clamp(0.85rem, 1.5vw, 1.5rem);
+        line-height: 1.5;
+        font-weight: 100;
+        letter-spacing: 0.05ch;
+        text-align: justify;
+        border-radius: 20px;
+        border: 10px solid #000;
+        box-shadow: 5px 5px 35px 25px #000000;
+        z-index: 10;
+      }
+
+      .main-textbox h1 {
+        font-size: 4rem;
+        font-weight: 350;
+        letter-spacing: 0.25ch;
+        word-spacing: 0.25ch;
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .main-textbox p.quote {
+        text-align: center;
+        font-weight: 400;
+        font-style: italic;
+        margin: 2rem 2rem;
+      }
+
+      .signature {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 3rem;
+        margin-bottom: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <div class="logo-container">
+      <img src="https://raw.githubusercontent.com/MRASServices/MRASS2/main/Home%20Page%20Logo.png" alt="Your Son Logo" id="nav-logo" />
+    </div>
+    <a class="nav-item nav-item-1" href="https://yourson.ca/about">ABOUT YOUR SON</a>
+    <a class="nav-item nav-item-2" href="https://yourson.ca/services">YOUR SON’S SERVICES</a>
+    <a class="nav-item nav-item-3" href="https://yourson.ca/contact&availability">CONTACT &amp; AVAILABILITY</a>
+    <a class="nav-item nav-item-4" href="https://yourson.ca/garments&goods">GARMENTS &amp; GOODS</a>
+  </nav>
+
+  <div class="main-textbox">
+    <h1>ABOUT YOUR SON</h1>
+
+    <p>
+      Born in 2024, Your Son was created with the express purpose of making life easier for the individuals, families, and professionals that we work with.
+      We can be described as full-time fixers; a jack of every trade; or an oddly pleasant mix of handyman and personal assistant - with a lot of other capabilities in between.
+    </p>
+    <br>
+
+    <p>
+      What matters most is that we get things done: properly, earnestly, and transparently. To encompass all that we do, and the way that we do it, we simply say that we are:
+    </p>
+
+    <p class="quote">Like having a son that actually listens</p>
+
+    <p>
+      Whether it's an extra set of hands and strong back; someone to keep you company and run your errands; or outsourcing those outstanding to-do’s - from the mundane to the exciting, Your Son is always here.
+    </p>
+    <br>
+
+    <p>
+      So, if you decide that you finally want to get <em>those things</em> done around the house, have an idea that you're tired of mulling over, or simply wish to talk:
+      consider giving us a call; Your Son always loves to hear from you.
+    </p>
+    <br>
+
+    <p>Sincerely,</p>
+
+    <div class="signature">
+      <img
+        src="https://see.fontimg.com/api/rf5/7BWnK/OWIxZDJiOTU1MThlNDNiMGFkZWQ3ZGUwMjU4MTllMWYub3Rm/WW91ciBTb24/brother-signature.png?r=fs&h=65&w=1000&fg=000000&bg=FFFFFF&tb=1&s=65"
+        alt="Signature"
+        style="width: 200px; height: auto;"
+      />
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const nav = document.getElementById('navbar');
+      const logo = document.getElementById('nav-logo');
+      const textboxes = document.querySelectorAll('.main-textbox, .secondary-textbox');
+
+      if (nav && logo) {
+        nav.addEventListener('mouseenter', () => {
+          if (window.innerWidth > 768) nav.classList.add('nav-active');
+        });
+
+        nav.addEventListener('mouseleave', () => {
+          if (window.innerWidth > 768) nav.classList.remove('nav-active');
+        });
+
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+          item.addEventListener('mouseenter', () => {
+            if (window.innerWidth > 768) nav.classList.add('nav-active');
+          });
+        });
+
+        logo.addEventListener('click', () => {
+          if (window.innerWidth <= 768) {
+            nav.classList.toggle('nav-open');
+          } else {
+            window.location.href = 'https://yourson.ca/home-s';
+          }
+        });
+      }
+
+      setTimeout(() => {
+        textboxes.forEach(box => box.classList.add('reveal-active'));
+      }, 200);
+    });
+  </script>
+</body>
+</html>
