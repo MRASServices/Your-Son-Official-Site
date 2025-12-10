@@ -308,10 +308,17 @@
     backdrop.addEventListener('click', closeModal);
       // Mobile toggle for dropdown
     function isMobile() { return window.matchMedia('(max-width: 768px)').matches; }
-    function toggleMobileNav() {
-      if (!isMobile()) return;
-      navbar.classList.toggle('nav-open');
-    }
+    function toggleMobileNav(e) {
+  if (isMobile()) {
+    navbar.classList.toggle('nav-open');   // mobile: toggle menu
+  } else {
+    window.location.href = 'https://yourson.ca/home-s';   // desktop: go home
+  }
+}
+
+logo.addEventListener('click', toggleMobileNav);
+logo.addEventListener('touchstart', toggleMobileNav, { passive: true });
+
     logo.addEventListener('click', toggleMobileNav, { passive: true });
     logo.addEventListener('touchstart', toggleMobileNav, { passive: true });
     logo.setAttribute('role','button');
